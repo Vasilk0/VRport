@@ -60,8 +60,8 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(circle at center, rgba(255, 20, 147, 0.15) 0%, transparent 70%)',
-        'gradient-hero': 'linear-gradient(135deg, rgba(255, 20, 147, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%)',
+        'gradient-radial': 'radial-gradient(circle at center, rgba(255, 20, 147, 0.08) 0%, transparent 70%)',
+        'gradient-hero': 'linear-gradient(135deg, rgba(255, 20, 147, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%)',
       },
     },
   },

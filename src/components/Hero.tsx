@@ -13,17 +13,19 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-gradient-hero">
-      {/* 3D Background */}
-      <Hero3D />
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* 3D Background - на заднем плане */}
+      <div className="absolute inset-0 z-0">
+        <Hero3D />
+      </div>
 
-      {/* Градиентный оверлей */}
-      <div className="absolute inset-0 bg-gradient-radial z-0"></div>
+      {/* Градиентный оверлей - поверх 3D но под контентом */}
+      <div className="absolute inset-0 z-10 bg-gradient-radial pointer-events-none"></div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+      {/* Content - поверх всего */}
+      <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
         <div
-          className={`inline-flex items-center gap-2 px-6 py-3 mb-8 rounded-full bg-pink-500/10 border border-pink-500/40 backdrop-blur-sm transition-all duration-700 glow-pink ${
+          className={`inline-flex items-center gap-2 px-6 py-3 mb-8 rounded-full bg-pink-500/10 border border-pink-500/40 backdrop-blur-sm transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
@@ -41,7 +43,7 @@ export default function Hero() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg">
+          <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent">
             {personalInfo.name}
           </span>
         </h1>
@@ -61,8 +63,8 @@ export default function Hero() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          Создаю современные веб-приложения с фокусом на производительность, 
-          доступность и пользовательский опыт. Превращаю идеи в цифровые шедевры 
+          Создаю современные веб-приложения с фокусом на производительность,
+          доступность и пользовательский опыт. Превращаю идеи в цифровые шедевры
           с помощью ярких технологий.
         </p>
 
@@ -90,7 +92,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
         <div className="flex flex-col items-center gap-2">
           <span className="text-xs text-pink-400 uppercase tracking-widest">Scroll</span>
           <FiArrowDown className="w-6 h-6 text-pink-400" />

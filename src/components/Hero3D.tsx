@@ -7,22 +7,22 @@ import * as THREE from "three";
 
 function Particles() {
   const ref = useRef<THREE.Points>(null);
-  
-  // Создаём 8000 частиц
+
+  // Создаём 10000 частиц - ещё больше!
   const points = useMemo(() => {
-    const positions = new Float32Array(8000 * 3);
-    const colors = new Float32Array(8000 * 3);
-    
-    for (let i = 0; i < 8000; i++) {
-      // Позиции в большей сфере
-      const r = 4 * Math.cbrt(Math.random());
+    const positions = new Float32Array(10000 * 3);
+    const colors = new Float32Array(10000 * 3);
+
+    for (let i = 0; i < 10000; i++) {
+      // Позиции в очень большой сфере
+      const r = 6 * Math.cbrt(Math.random());
       const theta = Math.random() * 2 * Math.PI;
       const phi = Math.acos(2 * Math.random() - 1);
-      
+
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
       positions[i * 3 + 2] = r * Math.cos(phi);
-      
+
       // Яркие цвета: розовый и голубой
       const colorChoice = Math.random();
       if (colorChoice < 0.5) {
@@ -37,16 +37,16 @@ function Particles() {
         colors[i * 3 + 2] = 1;
       }
     }
-    
+
     return { positions, colors };
   }, []);
 
   useFrame((state, delta) => {
     if (ref.current) {
       // Вращение частиц
-      ref.current.rotation.x -= delta * 0.05;
-      ref.current.rotation.y -= delta * 0.08;
-      
+      ref.current.rotation.x -= delta * 0.03;
+      ref.current.rotation.y -= delta * 0.05;
+
       // Пульсация
       const scale = 1 + Math.sin(state.clock.elapsedTime * 0.3) * 0.15;
       ref.current.scale.set(scale, scale, scale);
@@ -57,12 +57,12 @@ function Particles() {
     <Points ref={ref} positions={points.positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        size={0.03}
+        size={0.08}
         sizeAttenuation={true}
         depthWrite={false}
         vertexColors={true}
         colors={points.colors}
-        opacity={0.9}
+        opacity={1}
         blending={THREE.AdditiveBlending}
       />
     </Points>
@@ -71,33 +71,33 @@ function Particles() {
 
 function FloatingRings() {
   const rings = useRef<THREE.Mesh[]>([]);
-  
+
   useFrame((state, delta) => {
     rings.current.forEach((ring, i) => {
       // Вращение колец
       ring.rotation.x += delta * 0.1 * (i + 1);
       ring.rotation.z += delta * 0.15 * (i + 1);
-      
+
       // Движение по синусоиде
       ring.position.y = Math.sin(state.clock.elapsedTime * 0.4 + i * 0.5) * 0.8;
     });
   });
 
   const colors = ["#ff0080", "#00d4ff", "#ff1493"];
-  
+
   return (
     <>
       {colors.map((color, i) => (
         <Float key={i} speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
           <mesh
             ref={(el) => { if (el) rings.current[i] = el; }}
-            position={[(i - 1) * 2.5, 0, 0]}
+            position={[(i - 1) * 3.5, 0, 0]}
           >
-            <torusGeometry args={[0.8, 0.05, 16, 100]} />
+            <torusGeometry args={[1.2, 0.08, 16, 100]} />
             <meshStandardMaterial
               color={color}
               emissive={color}
-              emissiveIntensity={1}
+              emissiveIntensity={2}
               roughness={0.1}
               metalness={1}
             />
@@ -110,30 +110,30 @@ function FloatingRings() {
 
 function FloatingSpheres() {
   const spheres = useRef<THREE.Mesh[]>([]);
-  
+
   useFrame((state, delta) => {
     spheres.current.forEach((sphere, i) => {
       sphere.rotation.y += delta * 0.2;
-      sphere.position.x = Math.sin(state.clock.elapsedTime * 0.3 + i) * 3;
-      sphere.position.z = Math.cos(state.clock.elapsedTime * 0.3 + i) * 2;
+      sphere.position.x = Math.sin(state.clock.elapsedTime * 0.3 + i) * 4;
+      sphere.position.z = Math.cos(state.clock.elapsedTime * 0.3 + i) * 3;
     });
   });
 
   const colors = ["#ff69b4", "#00ced1", "#ff1493"];
-  
+
   return (
     <>
       {colors.map((color, i) => (
         <Float key={i} speed={3} rotationIntensity={1} floatIntensity={1}>
           <mesh
             ref={(el) => { if (el) spheres.current[i] = el; }}
-            position={[0, (i - 1) * 1.5, 0]}
+            position={[0, (i - 1) * 2, 0]}
           >
-            <sphereGeometry args={[0.4, 32, 32]} />
+            <sphereGeometry args={[0.8, 32, 32]} />
             <meshStandardMaterial
               color={color}
               emissive={color}
-              emissiveIntensity={0.8}
+              emissiveIntensity={1.5}
               roughness={0.1}
               metalness={0.5}
             />
@@ -146,22 +146,22 @@ function FloatingSpheres() {
 
 export default function Hero3D() {
   return (
-    <Canvas 
-      className="absolute inset-0 z-0" 
-      camera={{ position: [0, 0, 8], fov: 60 }}
+    <Canvas
+      className="absolute inset-0 z-0"
+      camera={{ position: [0, 0, 5], fov: 75 }}
     >
       {/* Освещение */}
-      <ambientLight intensity={0.3} />
-      <pointLight position={[10, 10, 10]} intensity={1} color="#ff0080" />
-      <pointLight position={[-10, -10, -10]} intensity={1} color="#00d4ff" />
-      <pointLight position={[0, 0, 10]} intensity={0.5} color="#ff1493" />
-      
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} intensity={2} color="#ff0080" />
+      <pointLight position={[-10, -10, -10]} intensity={2} color="#00d4ff" />
+      <pointLight position={[0, 0, 10]} intensity={1} color="#ff1493" />
+
       {/* Частицы */}
       <Particles />
-      
+
       {/* Плавающие кольца */}
       <FloatingRings />
-      
+
       {/* Плавающие сферы */}
       <FloatingSpheres />
     </Canvas>
