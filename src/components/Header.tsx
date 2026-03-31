@@ -34,7 +34,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-primary/90 backdrop-blur-md border-b border-accent/20 shadow-lg shadow-accent/10"
+          ? "bg-[#050510]/90 backdrop-blur-md border-b border-pink-500/30 shadow-lg shadow-pink-500/20"
           : "bg-transparent"
       }`}
     >
@@ -42,7 +42,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           <a
             href="#home"
-            className="text-xl font-bold bg-gradient-to-r from-accent via-accent-secondary to-accent-tertiary bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+            className="text-2xl font-bold bg-gradient-to-r from-pink-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("#home");
@@ -61,10 +61,10 @@ export default function Header() {
                     e.preventDefault();
                     scrollToSection(item.href);
                   }}
-                  className="px-4 py-2 text-gray-300 hover:text-accent-tertiary transition-colors text-sm font-medium relative"
+                  className="px-4 py-2 text-gray-300 hover:text-pink-400 transition-colors text-sm font-medium relative"
                 >
                   {item.label}
-                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-accent to-accent-tertiary transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                  <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-pink-500 to-cyan-500 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
                 </a>
               </div>
             ))}
@@ -72,7 +72,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-gray-300 hover:text-accent transition-colors"
+            className="md:hidden p-2 text-gray-300 hover:text-pink-400 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -83,7 +83,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isMenuOpen && (
-        <div className="md:hidden bg-primary/95 backdrop-blur-lg border-t border-accent/20">
+        <div className="md:hidden bg-[#050510]/95 backdrop-blur-lg border-t border-pink-500/30">
           <nav className="flex flex-col py-4">
             {navItems.map((item, index) => (
               <a
@@ -93,7 +93,7 @@ export default function Header() {
                   e.preventDefault();
                   scrollToSection(item.href);
                 }}
-                className="px-6 py-4 text-gray-300 hover:text-accent hover:bg-accent/10 transition-all border-l-2 border-transparent hover:border-accent"
+                className="px-6 py-4 text-gray-300 hover:text-pink-400 hover:bg-pink-500/10 transition-all border-l-2 border-transparent hover:border-pink-500"
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 {item.label}

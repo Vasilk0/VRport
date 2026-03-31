@@ -4,8 +4,8 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 15, 15, 26;
-  --background-end-rgb: 26, 26, 46;
+  --background-start-rgb: 5, 5, 16;
+  --background-end-rgb: 10, 10, 31;
 }
 
 * {
@@ -31,50 +31,77 @@ body {
 
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(90deg, #ff0080, #7c3aed, #00d4ff);
+    background: linear-gradient(90deg, #ff1493, #a855f7, #06b6d4);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
-  .text-gradient-warm {
-    background: linear-gradient(90deg, #ff8000, #ff0080, #7c3aed);
+  .text-gradient-pink {
+    background: linear-gradient(90deg, #ff1493, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-cyan {
+    background: linear-gradient(90deg, #06b6d4, #22d3ee);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-purple {
+    background: linear-gradient(90deg, #a855f7, #c084fc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
   .bg-gradient-radial {
-    background: radial-gradient(circle at center, rgba(255, 0, 128, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle at center, rgba(255, 20, 147, 0.15) 0%, transparent 70%);
   }
   
   .glow-pink {
-    box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
-  }
-  
-  .glow-purple {
-    box-shadow: 0 0 30px rgba(124, 58, 237, 0.5);
+    box-shadow: 0 0 40px rgba(255, 20, 147, 0.6);
   }
   
   .glow-cyan {
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 40px rgba(6, 182, 212, 0.6);
+  }
+  
+  .glow-purple {
+    box-shadow: 0 0 40px rgba(168, 85, 247, 0.6);
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - яркий градиент */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a2e;
+  background: #0a0a1f;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #ff0080, #7c3aed, #00d4ff);
-  border-radius: 5px;
+  background: linear-gradient(to bottom, #ff1493, #a855f7, #06b6d4);
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #ff3399, #9055ff, #33ddff);
+  background: linear-gradient(to bottom, #ff69b4, #c084fc, #22d3ee);
+}
+
+/* Selection color - розовый */
+::selection {
+  background-color: rgba(255, 20, 147, 0.4);
+  color: #ffffff;
+}
+
+/* Гладкие анимации */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
 }
